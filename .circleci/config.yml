@@ -1,0 +1,13 @@
+version: 2.1
+
+  jobs:
+    hello:
+      docker:
+        - image: cimg/base:current
+      steps:
+        - run: echo "Hello from the migrated pipeline!"
+
+  workflows:
+    hello-world:
+      jobs:
+        - hello
