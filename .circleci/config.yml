@@ -1,0 +1,29 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5
+
+workflows:
+  ci:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - main
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:18.0
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+          cache-version: v1
+      - run:
+          name: Run tests
+          command: npm test
+      - run:
+          name: Build
+          command: npm run build
